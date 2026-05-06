@@ -4,12 +4,23 @@ Une application web complète pour réviser le chapitre d'Histoire sur la fin de
 
 ## 🎯 Fonctionnalités
 
-✅ **🎴 Flashcards** - 25 cartes pour mémoriser les dates et événements clés  
-✅ **❓ Quiz Interactif** - 10 questions avec correction automatique  
-✅ **📝 Sujets de Dissertation** - 3 sujets avec plans structurés  
-✅ **✏️ Entraînement à la Rédaction** - 3 exercices avec feedback automatique  
-✅ **🧠 Mémorisation Espacée** - 15 termes avec système de révision intelligent  
+✅ **🎴 Flashcards** - 90 cartes pour mémoriser les dates et événements clés (50 aléatoires par session)  
+✅ **❓ Quiz Interactif** - 40 questions avec correction automatique et score final  
+✅ **📝 Sujets de Dissertation** - 8 sujets avec plans structurés  
+✅ **✏️ Entraînement à la Rédaction** - 8 exercices avec feedback automatique  
+✅ **🧠 Mémorisation Espacée** - 72 termes avec système de révision intelligent (50 aléatoires par session)  
 ✅ **🔗 Partage avec QR Code** - Partagez l'app et votre progression  
+
+### 🔄 Système de Randomisation
+
+Chaque visite génère une session différente :
+- **Flashcards** : 50 cartes aléatoires parmi 90
+- **Quiz** : 40 questions aléatoires parmi 40+
+- **Dissertations** : 5 sujets aléatoires parmi 8
+- **Rédaction** : 5 exercices aléatoires parmi 8
+- **Mémorisation** : 50 termes aléatoires parmi 72
+
+✨ Plus vous révisez, plus vous en découvrez !  
 
 ## 🚀 Déploiement sur GitHub Pages
 
