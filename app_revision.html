@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Révision - Fin de la WWII et Nouvel Ordre Mondial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .nav-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            padding: 15px 25px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn.flashcards { background-color: #FF6B6B; }
+        .nav-btn.quiz { background-color: #4ECDC4; }
+        .nav-btn.dissertation { background-color: #45B7D1; }
+        .nav-btn.redaction { background-color: #F9CA24; color: #333; }
+        .nav-btn.memorisation { background-color: #6C5CE7; }
+
+        .section {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        /* FLASHCARDS */
+        .flashcard-container {
+            perspective: 1000px;
+            margin: 30px 0;
+        }
+
+        .flashcard {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .flashcard:hover {
+            transform: scale(1.02);
+        }
+
+        .flashcard.flipped {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .flashcard-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary { background-color: #667eea; color: white; }
+        .btn-success { background-color: #6BCB77; color: white; }
+        .btn-danger { background-color: #FF6B6B; color: white; }
+        .btn-secondary { background-color: #95A5A6; color: white; }
+
+        /* QUIZ */
+        .quiz-question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-question h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f0ff;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #e8e9ff;
+        }
+
+        .option.correct {
+            border-color: #6BCB77;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .option.incorrect {
+            border-color: #FF6B6B;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .score {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            color: #333;
+        }
+
+        /* DISSERTATION */
+        .dissertation-item {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .dissertation-item h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .dissertation-item p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .structure-hint {
+            background: #e8e9ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        /* RÉDACTION */
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Arial', sans-serif;
+            font-size: 1em;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .word-count {
+            text-align: right;
+            color: #999;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+
+        .feedback {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+
+        .feedback.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        /* MÉMORISATION */
+        .spaced-repetition-card {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .spaced-repetition-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .spaced-repetition-card.mastered {
+            background: #d4edda;
+            border-color: #6BCB77;
+        }
+
+        .spaced-repetition-card.learning {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+
+        .difficulty-indicator {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .difficulty-easy { background: #d4edda; color: #155724; }
+        .difficulty-medium { background: #fff3cd; color: #856404; }
+        .difficulty-hard { background: #f8d7da; color: #721c24; }
+
+        .hidden-answer {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            color: #333;
+            display: none;
+        }
+
+        .hidden-answer.visible {
+            display: block;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #ddd;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            .nav-buttons { grid-template-columns: repeat(2, 1fr); }
+            .flashcard { min-height: 200px; padding: 20px; }
+            .modal-content { width: 95%; }
+        }
+
+        .breadcrumb {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .return-btn {
+            background-color: #95A5A6;
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        /* SHARE MODAL */
+        .share-section {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .qr-code-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        #qrcode {
+            margin: 0 auto;
+        }
+
+        .share-url {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 0.85em;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .copy-btn {
+            background-color: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .share-info {
+            background: #e8e9ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .share-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 App de Révision Histoire</h1>
+            <p class="subtitle">Fin de la WWII et Nouvel Ordre Mondial (1944-1947)</p>
+            <button class="nav-btn" onclick="openShareModal()" style="margin-top: 15px; background-color: #9B59B6;">🔗 Partager l'App</button>
+        </header>
+
+        <div class="nav-buttons">
+            <button class="nav-btn flashcards" onclick="showSection('flashcards')">🎴 Flashcards</button>
+            <button class="nav-btn quiz" onclick="showSection('quiz')">❓ Quiz</button>
+            <button class="nav-btn dissertation" onclick="showSection('dissertation')">📝 Dissertations</button>
+            <button class="nav-btn redaction" onclick="showSection('redaction')">✏️ Entraînement Rédaction</button>
+            <button class="nav-btn memorisation" onclick="showSection('memorisation')">🧠 Mémorisation Espacée</button>
+        </div>
+
+        <!-- FLASHCARDS SECTION -->
+        <div id="flashcards" class="section">
+            <h2>🎴 Flashcards - Répétez et Mémorisez</h2>
+            
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-number" id="flashcard-count">1</div>
+                    <div class="stat-label">Flashcard</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="flashcard-total">0</div>
+                    <div class="stat-label">Total</div>
+                </div>
+            </div>
+
+            <div class="flashcard-container">
+                <div class="flashcard" id="flashcard" onclick="flipFlashcard()">
+                    Cliquez pour voir la réponse
+                </div>
+            </div>
+
+            <div class="flashcard-controls">
+                <button class="btn-secondary" onclick="previousFlashcard()">← Précédent</button>
+                <button class="btn-primary" onclick="nextFlashcard()">Suivant →</button>
+                <button class="btn-secondary" onclick="shuffleFlashcards()">🔀 Mélanger</button>
+                <button class="btn-secondary" onclick="resetFlashcards()">↻ Recommencer</button>
+            </div>
+        </div>
+
+        <!-- QUIZ SECTION -->
+        <div id="quiz" class="section">
+            <h2>❓ Quiz - Testez Vos Connaissances</h2>
+            
+            <div id="quiz-container"></div>
+            <div id="quiz-result" style="display:none;">
+                <div class="score" id="final-score"></div>
+                <button class="btn-primary" onclick="restartQuiz()">Recommencer le Quiz</button>
+            </div>
+        </div>
+
+        <!-- DISSERTATION SECTION -->
+        <div id="dissertation" class="section">
+            <h2>📝 Sujets de Dissertation</h2>
+            <p style="margin-bottom: 20px; color: #666;">Sélectionnez un sujet et préparez votre introduction, développement et conclusion.</p>
+            
+            <div id="dissertation-list"></div>
+        </div>
+
+        <!-- RÉDACTION SECTION -->
+        <div id="redaction" class="section">
+            <h2>✏️ Entraînement à la Rédaction</h2>
+            
+            <div id="redaction-exercice"></div>
+        </div>
+
+        <!-- MÉMORISATION SECTION -->
+        <div id="memorisation" class="section">
+            <h2>🧠 Mémorisation Espacée (Spaced Repetition)</h2>
+            
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-number" id="stats-mastered">0</div>
+                    <div class="stat-label">Maîtrisées</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="stats-learning">0</div>
+                    <div class="stat-label">En cours</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="stats-new">0</div>
+                    <div class="stat-label">Nouvelles</div>
+                </div>
+            </div>
+
+            <div id="memorisation-list"></div>
+        </div>
+    </div>
+
+    <!-- DISSERTATION MODAL -->
+    <div id="dissertationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDissertationModal()">&times;</span>
+            <div id="modal-dissertation-content"></div>
+        </div>
+    </div>
+
+    <!-- REDACTION MODAL -->
+    <div id="redactionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRedactionModal()">&times;</span>
+            <div id="modal-redaction-content"></div>
+        </div>
+    </div>
+
+    <!-- SHARE MODAL -->
+    <div id="shareModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeShareModal()">&times;</span>
+            <div class="modal-header">🔗 Partager l'App de Révision</div>
+            
+            <div class="share-info">
+                <strong>Partagez cette app avec vos camarades !</strong><br>
+                Vous pouvez partager l'app avec ou sans votre progression actuelle.
+            </div>
+
+            <h4 style="margin-top: 20px; margin-bottom: 10px;">Option 1 : URL Simple (sans progression)</h4>
+            <div class="share-url" id="simple-url"></div>
+            <button class="copy-btn" onclick="copyToClipboard('simple-url')">📋 Copier l'URL</button>
+            <button class="copy-btn" onclick="shareViaQR('simple')">📱 Voir le QR Code</button>
+
+            <h4 style="margin-top: 20px; margin-bottom: 10px;">Option 2 : URL avec Progression (sauvegarde votre progrès)</h4>
+            <div class="share-url" id="progress-url"></div>
+            <button class="copy-btn" onclick="copyToClipboard('progress-url')">📋 Copier l'URL</button>
+            <button class="copy-btn" onclick="shareViaQR('progress')">📱 Voir le QR Code</button>
+
+            <div class="share-success" id="copy-success">✓ URL copiée dans le presse-papiers !</div>
+
+            <h4 style="margin-top: 20px; margin-bottom: 10px;">QR Code</h4>
+            <div class="qr-code-container">
+                <div id="qrcode"></div>
+            </div>
+
+            <h4 style="margin-top: 20px; margin-bottom: 10px;">Partage Direct</h4>
+            <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="shareViaEmail()">📧 Partager par Email</button>
+            <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="shareViaWhatsApp()">💬 Partager sur WhatsApp</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        // ============ DONNÉES ============
+        // ============ DONNÉES ============
+
+        const flashcardsData = [
+            // DÉBARQUEMENT ET VICTOIRES ALLIÉES
+            { question: "Quelle est la date du débarquement en Normandie ?", answer: "6 juin 1944 - Opération Overlord" },
+            { question: "Combien de soldats le premier jour à Normandie ?", answer: "156 000 soldats" },
+            { question: "Qui était le commandant suprême de l'Opération Overlord ?", answer: "Général Eisenhower" },
+            { question: "Quels pays ont participé au débarquement ?", answer: "États-Unis, Royaume-Uni, Canada" },
+            { question: "Quand Paris a-t-elle été libérée ?", answer: "15 août 1944" },
+            { question: "Qu'est-ce que la 'stratégie du saut de puces' ?", answer: "Island hopping - contournement des positions japonaises fortes" },
+            { question: "Quand Berlin a-t-elle été encerclée ?", answer: "Avril-mai 1945" },
+            { question: "Quand Hitler s'est-il suicidé ?", answer: "30 avril 1945" },
+            { question: "Quand les soviétiques et alliés se sont-ils rencontrés ?", answer: "25 avril 1945 sur l'Elbe" },
+            
+            // CAPITULATIONS ET FIN DE LA GUERRE
+            { question: "Quand fut la capitulation allemande ?", answer: "7-8 mai 1945" },
+            { question: "Où l'acte de capitulation allemande a-t-il été signé ?", answer: "À Reims et à Berlin" },
+            { question: "Quand le Japon a-t-il capitulé ?", answer: "2 septembre 1945" },
+            { question: "Où le Japon a-t-il signé sa capitulation ?", answer: "À bord du USS Missouri" },
+            { question: "Quels pays ont signé la capitulation japonaise ?", answer: "Japon, États-Unis, Royaume-Uni, URSS" },
+            
+            // ARMES ATOMIQUES
+            { question: "Quand a eu lieu le bombardement de Hiroshima ?", answer: "6 août 1945" },
+            { question: "Combien de morts à Hiroshima instantanément ?", answer: "80 000 morts instantanément (140 000 au total)" },
+            { question: "Quel type de bombe fut utilisée sur Hiroshima ?", answer: "Bombe à uranium-235" },
+            { question: "Quand a eu lieu le bombardement de Nagasaki ?", answer: "9 août 1945" },
+            { question: "Combien de morts à Nagasaki instantanément ?", answer: "40 000 morts instantanément (70 000 au total)" },
+            { question: "Quel type de bombe fut utilisée sur Nagasaki ?", answer: "Bombe à plutonium" },
+            { question: "Quand l'URSS est-elle entrée en guerre contre le Japon ?", answer: "9 août 1945 (même jour que Nagasaki)" },
+            
+            // BILAN HUMAIN
+            { question: "Combien de morts environ pendant la WWII ?", answer: "60 à 70 millions de morts" },
+            { question: "Quel pourcentage étaient civils ?", answer: "Environ 40% de civils" },
+            { question: "Combien de Soviétiques sont morts ?", answer: "24 millions (dont 14 millions de civils)" },
+            { question: "Combien de Juifs ont été tués à la Shoah ?", answer: "6 millions de Juifs" },
+            { question: "Combien de Tziganes ont été tués ?", answer: "500 000 Tziganes" },
+            { question: "Combien de prisonniers alliés sont morts ?", answer: "3 millions de prisonniers" },
+            { question: "Combien de morts en France ?", answer: "270 000 morts en France" },
+            { question: "Combien de morts aux bombardements allemands ?", answer: "300 000 morts en Allemagne" },
+            { question: "Quel pourcentage de Berlin a été détruit ?", answer: "80% de Berlin" },
+            { question: "Quel pourcentage de Varsovie a été détruit ?", answer: "90% de Varsovie" },
+            
+            // HOLOCAUSTE
+            { question: "Que signifie Shoah ?", answer: "Extermination systématique de 6 millions de Juifs" },
+            { question: "Quels étaient les principaux camps d'extermination ?", answer: "Auschwitz, Treblinka, Sobibor" },
+            { question: "Qu'utilisaient les nazis pour éliminer les Juifs ?", answer: "Fours crématoires et fosses communes" },
+            
+            // CONFÉRENCES ALLIÉES
+            { question: "Quand la conférence de Yalta a-t-elle eu lieu ?", answer: "Février 1945" },
+            { question: "Où la conférence de Yalta a-t-elle eu lieu ?", answer: "En Crimée" },
+            { question: "Qui a participé à Yalta ?", answer: "Roosevelt (USA), Churchill (RU), Staline (URSS)" },
+            { question: "Quand la conférence de Potsdam a-t-elle eu lieu ?", answer: "Juillet-août 1945" },
+            { question: "Qui a participé à Potsdam ?", answer: "Truman (USA), Churchill/Attlee (RU), Staline (URSS)" },
+            
+            // JUSTICE ET PROCÈS
+            { question: "Quand le Procès de Nuremberg a-t-il eu lieu ?", answer: "Novembre 1945 - octobre 1946" },
+            { question: "Où le Procès de Nuremberg a-t-il eu lieu ?", answer: "À Nuremberg" },
+            { question: "Combien d'accusés principaux à Nuremberg ?", answer: "24 accusés (Göring, Hess, Speer, etc.)" },
+            { question: "Combien de juges avaient composé le tribunal de Nuremberg ?", answer: "Juges américains, britanniques, soviétiques et français" },
+            { question: "Combien de condamnations à mort à Nuremberg ?", answer: "12 condamnations à mort" },
+            { question: "Quand le Procès de Tokyo a-t-il eu lieu ?", answer: "Mai 1946 - novembre 1948" },
+            { question: "Combien d'accusés à Tokyo ?", answer: "28 accusés" },
+            { question: "Qu'est-ce qu'un 'crime contre l'humanité' ?", answer: "Nouvelle catégorie juridique créée à Nuremberg" },
+            { question: "Qu'est-ce que le 'génocide' selon Nuremberg ?", answer: "Concept créé à Nuremberg pour l'extermination systématique" },
+            
+            // ONU ET ORGANISATIONS
+            { question: "Quand l'ONU a-t-elle été créée ?", answer: "1945 à San Francisco" },
+            { question: "Combien de pays signataires pour créer l'ONU ?", answer: "51 pays signataires" },
+            { question: "Quelle est la capitale de l'ONU ?", answer: "New York" },
+            { question: "Combien de membres permanents au Conseil de sécurité ?", answer: "5 membres permanents" },
+            { question: "Qui sont les 5 membres permanents de l'ONU ?", answer: "USA, URSS, Royaume-Uni, France, Chine" },
+            { question: "Qui a le droit de veto à l'ONU ?", answer: "Les 5 membres permanents du Conseil de sécurité" },
+            { question: "Qui était le premier secrétaire général de l'ONU ?", answer: "Trygve Lie (Norvège) 1946-1953" },
+            { question: "Quand Bretton Woods a-t-il eu lieu ?", answer: "Juillet 1944" },
+            { question: "Combien de nations à Bretton Woods ?", answer: "44 nations" },
+            { question: "Qu'est-ce qui a été créé à Bretton Woods ?", answer: "Le FMI et la Banque mondiale" },
+            { question: "Qu'est-ce que l'étalon de change-or ?", answer: "Système où 35$ = 1 once d'or" },
+            
+            // PLAN MARSHALL
+            { question: "Quand le Plan Marshall a-t-il commencé ?", answer: "1947-1952" },
+            { question: "Combien de dollars le Plan Marshall représentait-il ?", answer: "13 milliards de dollars" },
+            { question: "Combien de pays ont participé au Plan Marshall ?", answer: "16 pays" },
+            { question: "Quels pays ont refusé le Plan Marshall ?", answer: "L'URSS et les pays de l'Est" },
+            { question: "Quel était l'objectif principal du Plan Marshall ?", answer: "Reconstruire l'Europe de l'Ouest et éviter la révolution communiste" },
+            
+            // ALLEMAGNE ET OCCUPATION
+            { question: "En combien de zones l'Allemagne a-t-elle été divisée ?", answer: "4 zones (américaine, britannique, française, soviétique)" },
+            { question: "Comment Berlin a-t-elle été divisée ?", answer: "En 4 zones d'occupation" },
+            { question: "Qu'est-ce que la 'démilitarisation' de l'Allemagne ?", answer: "Suppression complète des forces armées allemandes" },
+            { question: "Qu'est-ce que la 'dénazification' ?", answer: "Suppression de l'idéologie nazie en Allemagne" },
+            { question: "Qu'a perdu l'Allemagne territorialement ?", answer: "Poméranie, Silésie, Dantzig, Memel, Alsace-Lorraine" },
+            { question: "Quel pourcentage de territoires l'Allemagne a-t-elle perdu ?", answer: "25% de sa superficie" },
+            
+            // GUERRE FROIDE
+            { question: "Quand la Guerre froide a-t-elle commencé ?", answer: "1945-1949" },
+            { question: "Qui étaient les deux superpuissances ?", answer: "USA et URSS" },
+            { question: "Qu'est-ce que la 'Doctrine Truman' ?", answer: "Politique d'endiguement du communisme (12 mars 1947)" },
+            { question: "Qu'est-ce que la 'Doctrine Jdanov' ?", answer: "Division du monde en deux camps irréconciliables (1947)" },
+            { question: "Qu'est-ce que le 'Rideau de fer' ?", answer: "Division entre Europe Ouest (capitalisme) et Est (communisme)" },
+            { question: "Qui a parlé du 'Rideau de fer' ?", answer: "Winston Churchill en mars 1946" },
+            { question: "Quand a eu lieu le Blocus de Berlin ?", answer: "Juin 1948 - mai 1949" },
+            { question: "Comment les Américains ont-ils résolu le Blocus de Berlin ?", answer: "Pont aérien massif (Airlift)" },
+            { question: "Quand l'OTAN a-t-elle été créée ?", answer: "Avril 1949" },
+            { question: "Combien de membres fondateurs pour l'OTAN ?", answer: "12 membres fondateurs" },
+            { question: "Quand l'URSS a-t-elle testé sa bombe atomique ?", answer: "Août 1949" },
+            { question: "Quand Mao Zedong a-t-il pris le pouvoir en Chine ?", answer: "Octobre 1949" },
+            { question: "Quel fut l'impact de la victoire de Mao sur l'Occident ?", answer: "'Coup de Pékin' - panique anticommuniste en Occident" }
+        ];
+
+        const quizData = [
+            // DÉBARQUEMENT ET VICTOIRES
+            {
+                question: "En quelle année l'Allemagne a-t-elle capitulé ?",
+                options: ["1943", "1944", "1945", "1946"],
+                correct: 2,
+                explanation: "8 mai 1945 : capitulation sans conditions de l'Allemagne"
+            },
+            {
+                question: "Combien de soldats ont débarqué en Normandie le 6 juin 1944 ?",
+                options: ["80 000", "156 000", "250 000", "400 000"],
+                correct: 1,
+                explanation: "156 000 soldats le premier jour de l'Opération Overlord"
+            },
+            {
+                question: "Qui commandait l'Opération Overlord ?",
+                options: ["Montgomery", "Eisenhower", "Bradley", "Patton"],
+                correct: 1,
+                explanation: "Général Dwight D. Eisenhower était commandant suprême"
+            },
+            
+            // ARMES ATOMIQUES
+            {
+                question: "Combien de personnes sont mortes à Hiroshima instantanément ?",
+                options: ["40 000", "60 000", "80 000", "120 000"],
+                correct: 2,
+                explanation: "Environ 80 000 morts instantanément, 140 000 au total à Hiroshima"
+            },
+            {
+                question: "Quel type de bombe a été lancée sur Hiroshima ?",
+                options: ["Bombe à hydrogène", "Bombe à uranium-235", "Bombe à plutonium", "Bombe chimique"],
+                correct: 1,
+                explanation: "Bombe à uranium-235 sur Hiroshima"
+            },
+            {
+                question: "Combien de jours après Hiroshima Nagasaki a-t-elle été bombardée ?",
+                options: ["1 jour", "3 jours", "7 jours", "14 jours"],
+                correct: 1,
+                explanation: "Nagasaki a été bombardée 3 jours après Hiroshima"
+            },
+            {
+                question: "Le Japon a capitulé le...",
+                options: ["1er septembre 1945", "2 septembre 1945", "15 septembre 1945", "15 août 1945"],
+                correct: 1,
+                explanation: "2 septembre 1945 : capitulation officielle du Japon"
+            },
+            
+            // PLAN MARSHALL
+            {
+                question: "Quel était l'objectif principal du Plan Marshall ?",
+                options: [
+                    "Occuper militairement l'Europe",
+                    "Reconstruire l'Europe de l'Ouest et éviter la révolution communiste",
+                    "Préparer une invasion soviétique",
+                    "Exploiter les ressources européennes"
+                ],
+                correct: 1,
+                explanation: "Le Plan Marshall visait la reconstruction économique pour créer une barrière au communisme"
+            },
+            {
+                question: "Combien de milliards de dollars le Plan Marshall représentait-il ?",
+                options: ["5 milliards", "8 milliards", "13 milliards", "20 milliards"],
+                correct: 2,
+                explanation: "13 milliards de dollars sur la période 1947-1952"
+            },
+            {
+                question: "Quels pays ont refusé le Plan Marshall ?",
+                options: ["France et Italie", "Royaume-Uni et Pays-Bas", "URSS et pays de l'Est", "Allemagne et Autriche"],
+                correct: 2,
+                explanation: "L'URSS et les pays sous contrôle soviétique ont refusé le Plan Marshall"
+            },
+            
+            // CONFÉRENCES
+            {
+                question: "Qui a prononcé le discours du 'Rideau de fer' ?",
+                options: ["Roosevelt", "Truman", "Churchill", "Attlee"],
+                correct: 2,
+                explanation: "Winston Churchill, discours à Fulton (Missouri) en mars 1946"
+            },
+            {
+                question: "À la conférence de Yalta, quel accord majeur a été pris ?",
+                options: [
+                    "Création de l'ONU",
+                    "Engagement soviétique contre le Japon",
+                    "Plan Marshall approuvé",
+                    "Formation de l'OTAN"
+                ],
+                correct: 1,
+                explanation: "Yalta (février 1945) : l'URSS s'engage à entrer en guerre contre le Japon"
+            },
+            
+            // PROCÈS ET JUSTICE
+            {
+                question: "Quel concept juridique novateur a été créé à Nuremberg ?",
+                options: [
+                    "Crime contre la paix",
+                    "Crime contre l'humanité",
+                    "Crime de guerre",
+                    "Tous les trois"
+                ],
+                correct: 3,
+                explanation: "Nuremberg a établi ces trois catégories de crimes internationaux"
+            },
+            {
+                question: "Combien d'accusations a reçu le tribunal de Nuremberg ?",
+                options: ["12 accusés", "18 accusés", "24 accusés", "30 accusés"],
+                correct: 2,
+                explanation: "24 accusés principaux jugés à Nuremberg"
+            },
+            {
+                question: "Quelle a été la sentence pour Göring à Nuremberg ?",
+                options: ["Emprisonnement à vie", "Condamnation à mort", "Libération", "30 ans d'emprisonnement"],
+                correct: 1,
+                explanation: "Göring a été condamné à mort à Nuremberg"
+            },
+            
+            // ONU
+            {
+                question: "Combien de pays ont signé la Charte de l'ONU en 1945 ?",
+                options: ["25 pays", "40 pays", "51 pays", "75 pays"],
+                correct: 2,
+                explanation: "51 pays signataires à San Francisco en 1945"
+            },
+            {
+                question: "Combien de membres permanents au Conseil de sécurité ?",
+                options: ["3", "4", "5", "7"],
+                correct: 2,
+                explanation: "5 membres permanents : USA, URSS, RU, France, Chine"
+            },
+            {
+                question: "Qui possède le droit de veto à l'ONU ?",
+                options: [
+                    "Tous les membres de l'Assemblée générale",
+                    "Les 5 membres permanents du Conseil de sécurité",
+                    "Le secrétaire général",
+                    "Personne ne peut utiliser le veto"
+                ],
+                correct: 1,
+                explanation: "Les 5 membres permanents peuvent bloquer les résolutions"
+            },
+            
+            // BILAN DE GUERRE
+            {
+                question: "Combien de personnes environ sont mortes à la WWII ?",
+                options: ["40-50 millions", "60-70 millions", "80-90 millions", "Plus de 100 millions"],
+                correct: 1,
+                explanation: "Entre 60 et 70 millions de morts"
+            },
+            {
+                question: "Quel pourcentage des morts étaient civils ?",
+                options: ["20%", "30%", "40%", "50%"],
+                correct: 2,
+                explanation: "Environ 40% étaient civils"
+            },
+            {
+                question: "Combien de Juifs ont été tués à la Shoah ?",
+                options: ["3 millions", "4,5 millions", "6 millions", "8 millions"],
+                correct: 2,
+                explanation: "6 millions de Juifs ont été exterminés"
+            },
+            {
+                question: "Combien de Soviétiques sont morts ?",
+                options: ["12 millions", "18 millions", "24 millions", "30 millions"],
+                correct: 2,
+                explanation: "24 millions de Soviétiques (dont 14 millions de civils)"
+            },
+            
+            // ÉCONOMIE - BRETTON WOODS
+            {
+                question: "Quel accord créait le FMI et la Banque mondiale ?",
+                options: ["Yalta", "Potsdam", "Bretton Woods", "San Francisco"],
+                correct: 2,
+                explanation: "Accords de Bretton Woods (juillet 1944)"
+            },
+            {
+                question: "Qu'est-ce que l'étalon de change-or établi à Bretton Woods ?",
+                options: [
+                    "L'euro comme monnaie unique",
+                    "Le dollar comme référence (35$ = 1 once d'or)",
+                    "Une monnaie mondiale",
+                    "L'or comme seule monnaie d'échange"
+                ],
+                correct: 1,
+                explanation: "Le dollar américain était la monnaie de référence"
+            },
+            
+            // ALLEMAGNE - OCCUPATION
+            {
+                question: "En combien de zones l'Allemagne a-t-elle été divisée ?",
+                options: ["2", "3", "4", "5"],
+                correct: 2,
+                explanation: "4 zones : américaine, britannique, française et soviétique"
+            },
+            {
+                question: "Quel pourcentage de territoire l'Allemagne a-t-elle perdu ?",
+                options: ["15%", "25%", "35%", "50%"],
+                correct: 1,
+                explanation: "L'Allemagne a perdu 25% de sa superficie"
+            },
+            {
+                question: "Quel était le taux de destruction de Berlin ?",
+                options: ["40%", "60%", "80%", "95%"],
+                correct: 2,
+                explanation: "80% de Berlin a été détruit"
+            },
+            
+            // GUERRE FROIDE - PREMIÈRES CRISES
+            {
+                question: "Quand le Blocus de Berlin s'est-il terminé ?",
+                options: ["Décembre 1948", "Mars 1949", "Mai 1949", "Janvier 1950"],
+                correct: 2,
+                explanation: "Mai 1949 : fin du blocus après le pont aérien américain"
+            },
+            {
+                question: "Combien de villes l'URSS a-t-elle tentée de prendre avec le Blocus de Berlin ?",
+                options: ["1 (Berlin-Ouest)", "2 (Berlin-Ouest et Munich)", "3 (Berlin, Vienne, Trieste)", "Aucune (tentative échouée)"],
+                correct: 0,
+                explanation: "L'URSS a tenté de forcer Berlin-Ouest en coupant les accès terrestre"
+            },
+            {
+                question: "Quand l'OTAN a-t-elle été créée ?",
+                options: ["Mars 1948", "Avril 1949", "Janvier 1950", "Juillet 1951"],
+                correct: 1,
+                explanation: "Avril 1949 : création de l'OTAN"
+            },
+            {
+                question: "Combien de membres fondateurs l'OTAN comptait-elle ?",
+                options: ["8", "10", "12", "15"],
+                correct: 2,
+                explanation: "12 membres fondateurs de l'OTAN"
+            },
+            {
+                question: "Qu'est-ce que la 'Doctrine Truman' ?",
+                options: [
+                    "Appel au désarmement nucléaire",
+                    "Politique d'endiguement du communisme",
+                    "Création de l'ONU",
+                    "Alliance avec l'URSS"
+                ],
+                correct: 1,
+                explanation: "Doctrine du 12 mars 1947 : contrer le communisme partout"
+            },
+            {
+                question: "Quand l'URSS a-t-elle testé sa première bombe atomique ?",
+                options: ["1947", "1948", "1949", "1950"],
+                correct: 2,
+                explanation: "Août 1949 : l'URSS détone sa première bombe atomique"
+            },
+            {
+                question: "Quel événement asiatique majeur s'est produit en 1949 ?",
+                options: ["Invasion de la Mandchourie", "Prise du pouvoir par Mao en Chine", "Guerre sino-japonaise", "Révolution en Corée"],
+                correct: 1,
+                explanation: "Octobre 1949 : Mao Zedong prend le pouvoir en Chine"
+            },
+            
+            // CONCEPTS ET DOCTRINES
+            {
+                question: "Qu'est-ce que le 'Rideau de fer' ?",
+                options: [
+                    "Frontière fortifiée entre France et Allemagne",
+                    "Ligne de démarcation en Allemagne",
+                    "Division entre Europe Ouest capitaliste et Est communiste",
+                    "Un système de défense militaire"
+                ],
+                correct: 2,
+                explanation: "Expression symbolisant la division de l'Europe (1946)"
+            },
+            {
+                question: "Qui a dit 'De Stettin en Baltique à Trieste en Adriatique' (Rideau de fer) ?",
+                options: ["Roosevelt", "Truman", "Churchill", "Staline"],
+                correct: 2,
+                explanation: "Winston Churchill en mars 1946"
+            },
+            {
+                question: "Qu'est-ce que la 'Guerre froide' ?",
+                options: [
+                    "Une période d'isolationnisme américain",
+                    "Un conflit armé de faible intensité",
+                    "Confrontation idéologique sans guerre directe USA-URSS",
+                    "Une alliances entre USA et URSS"
+                ],
+                correct: 2,
+                explanation: "1945-1991 : confrontation idéologique et politique"
+            },
+            {
+                question: "Qu'est-ce que la 'Doctrine Jdanov' ?",
+                options: [
+                    "Plan soviétique d'invasion de l'Europe",
+                    "Division du monde en deux camps irréconciliables",
+                    "Traité de paix sino-soviet",
+                    "Accord économique entre pays communistes"
+                ],
+                correct: 1,
+                explanation: "1947 : réponse soviétique à la Doctrine Truman"
+            },
+            
+            // QUESTIONS DE SYNTHÈSE
+            {
+                question: "Quels étaient les deux systèmes incompatibles qui émergeaient ?",
+                options: [
+                    "Fascisme vs Nazisme",
+                    "Capitalisme libéral vs Communisme totalitaire",
+                    "Monarchie vs Démocratie",
+                    "Libéralisme vs Socialisme démocratique"
+                ],
+                correct: 1,
+                explanation: "USA (capitalisme) vs URSS (communisme) : systèmes incompatibles"
+            },
+            {
+                question: "Qui étaient les 'Superpuissances' après 1945 ?",
+                options: [
+                    "USA et Royaume-Uni",
+                    "USA et France",
+                    "USA et URSS",
+                    "Allemagne et Japon"
+                ],
+                correct: 2,
+                explanation: "USA et URSS étaient les deux seules superpuissances"
+            }
+        ];
+
+        const dissertations = [
+            {
+                title: "Comment la Seconde Guerre mondiale débouche-t-elle sur un nouvel ordre mondial ?",
+                plan: {
+                    intro: "Phrase d'accroche sur le bilan de la guerre → problématique → annonce du plan",
+                    part1: "I. Une guerre aux conséquences dramatiques\n- Bilan humain (60 millions de morts, Shoah)\n- Destructions matérielles massives\n- Apparition de l'arme atomique",
+                    part2: "II. Une volonté de reconstruire et d'organiser la paix\n- Jugements des criminels (Nuremberg)\n- Création de l'ONU\n- Accords économiques (Bretton Woods, Plan Marshall)",
+                    part3: "III. Une division du monde en deux blocs antagonistes\n- Incompatibilité des systèmes (USA vs URSS)\n- Formation des blocs (1945-1949)\n- Premières crises (Berlin, OTAN)",
+                    conclusion: "Rappel de la thèse → synthèse des trois parties → ouverture vers la Guerre froide"
+                }
+            },
+            {
+                title: "Quels sont les enjeux de la création de l'ONU en 1945 ?",
+                plan: {
+                    intro: "Contexte : fin de la WWII → création de l'ONU → quels enjeux ?",
+                    part1: "I. Créer une organisation capable de maintenir la paix\n- Échec de la Société des Nations\n- Structure et organes de l'ONU\n- Limitation : droit de veto des 5 permanents",
+                    part2: "II. Mettre fin à l'impunité des crimes de masse\n- Procès de Nuremberg\n- Concept de 'crime contre l'humanité'\n- Justice internationale",
+                    part3: "III. Reconstruire économiquement le monde\n- Bretton Woods et institutions financières\n- Plan Marshall\n- Objectif anti-communiste caché",
+                    conclusion: "ONU = espoir d'un nouvel ordre pacifique, mais paralysée par la Guerre froide"
+                }
+            },
+            {
+                title: "Pourquoi peut-on dire que la Seconde Guerre mondiale débouche immédiatement sur la Guerre froide ?",
+                plan: {
+                    intro: "Deux superpuissances émergent → incompatibilité → début Guerre froide",
+                    part1: "I. Incompatibilité idéologique fondamentale\n- Capitalisme vs Communisme\n- Démocratie libérale vs Totalitarisme\n- Chacun perçoit l'autre comme menace existentielle",
+                    part2: "II. Tensions dès les conférences d'Alliés\n- Divergences à Yalta (février 1945)\n- Tensions à Potsdam (juillet 1945)\n- Questions sans réponse : Europe de l'Est, Allemagne",
+                    part3: "III. Manifestations rapides de la Guerre froide\n- Formation des blocs (1945-1949)\n- Rideau de fer (1946)\n- Blocus de Berlin, OTAN, course atomique",
+                    conclusion: "1945 : fin de la WWII et début immédiat de la Guerre froide"
+                }
+            },
+            {
+                title: "Le Plan Marshall : instrument de reconstruction ou d'impérialisme américain ?",
+                plan: {
+                    intro: "Plan Marshall 1947-1952 → reconstruction ou domination ?",
+                    part1: "I. Le Plan Marshall comme solution à l'effondrement européen\n- Contexte : Europe dévastée, famine, économie effondrée\n- Risque de révolution communiste (France, Italie)\n- 13 milliards de dollars pour 16 pays",
+                    part2: "II. Objectifs stratégiques camouflés\n- Création d'alliés économiques des États-Unis\n- Ouverture des marchés européens\n- Endiguement du communisme soviétique",
+                    part3: "III. Impact réel du Plan\n- 'Miracle économique' en Europe de l'Ouest\n- OECE et intégration économique\n- Rejet de l'URSS et vasalisation",
+                    conclusion: "Plan Marshall = reconstruction réelle + impérialisme économique américain"
+                }
+            },
+            {
+                title: "La Shoah : comment expliquer le génocide nazi ?",
+                plan: {
+                    intro: "Shoah = extermination de 6 millions de Juifs → comment l'expliquer ?",
+                    part1: "I. Racisme nazi et idéologie de l'Aryen\n- Darwinisme social et théories racistes\n- Propagande nazie anti-sémite\n- Élimination d'une 'race inférieure' selon les nazis",
+                    part2: "II. De la persécution à l'extermination\n- Lois de Nuremberg (1935)\n- Ghettos et déportations\n- Conférence de Wannsee (1942) et 'solution finale'",
+                    part3: "III. Conditions qui ont permis le génocide\n- Totalitarisme et contrôle complet\n- Déshumanisation des victimes\n- Silences et complicités internationales",
+                    conclusion: "Shoah = pire atrocité du XXe siècle, impossible à oublier"
+                }
+            },
+            {
+                title: "Le Rideau de fer : une réalité ou une métaphore de Churchill ?",
+                plan: {
+                    intro: "Churchill 1946 : 'Rideau de fer' → réalité ou exagération ?",
+                    part1: "I. Une division réelle de l'Europe\n- Soviétiques occupent l'Europe de l'Est\n- Satellisation des États (Pologne, Hongrie, etc.)\n- Frontières fermées avec le monde occidental",
+                    part2: "II. Fondements idéologiques de cette division\n- Incompatibilité capitalisme vs communisme\n- Doctrine Truman vs Doctrine Jdanov\n- Deux visions du monde inconciliables",
+                    part3: "III. Conséquences du Rideau de fer\n- Allemagne divisée (1949)\n- Bloc soviétique sous contrôle de Moscou\n- Isolement de l'Europe de l'Est jusqu'à 1989",
+                    conclusion: "Le Rideau de fer = réalité géopolitique majeure pendant 45 ans"
+                }
+            },
+            {
+                title: "Les procès de Nuremberg et Tokyo : peut-on faire la justice après une guerre totale ?",
+                plan: {
+                    intro: "Nuremberg 1945-46 et Tokyo 1946-48 → justice légitime ou vengeance ?",
+                    part1: "I. Les innovations juridiques\n- Concept de 'crime contre l'humanité'\n- Responsabilité individuelle des chefs d'État\n- Génocide comme crime international",
+                    part2: "II. Limites et critiques\n- Justice des vainqueurs (Soviétiques non poursuivis)\n- Chefs alliés pas jugés\n- Droit international en construction",
+                    part3: "III. Signification morale\n- Reconnaissance des atrocités\n- Établissement de précédents\n- Début de la conscience internationale",
+                    conclusion: "Procès imparfaits mais essentiels pour l'après-guerre"
+                }
+            },
+            {
+                title: "Bretton Woods et l'hégémonie économique américaine : une nouvelle forme de domination ?",
+                plan: {
+                    intro: "Bretton Woods 1944 → FMI, Banque mondiale, étalon-or → domination US ?",
+                    part1: "I. Structure de Bretton Woods\n- Création du FMI et Banque Mondiale\n- Étalon de change-or (35$ = 1 oz d'or)\n- Dollar comme monnaie de référence mondiale",
+                    part2: "II. Avantages pour les États-Unis\n- Hégémonie monétaire\n- Contrôle des institutions financières\n- Avantage économique structurel",
+                    part3: "III. Conséquences pour le monde\n- Stabilité monétaire (jusqu'en 1971)\n- Inégalités économiques Nord-Sud\n- Dépendance envers le dollar américain",
+                    conclusion: "Bretton Woods = reconstruire le monde sous leadership américain"
+                }
+            }
+        ];
+
+        const redactionExercices = [
+            {
+                title: "Analysez le rôle du Plan Marshall",
+                instruction: "Rédigez un paragraphe structuré (7-10 lignes) expliquant :\n1. Le contexte (pourquoi le Plan Marshall ?)\n2. Les objectifs affichés et cachés\n3. L'impact sur la division Est-Ouest",
+                criterion: [
+                    "✓ Présence d'une idée principale",
+                    "✓ Arguments avec exemples précis",
+                    "✓ Chronologie respectée",
+                    "✓ Vocabulaire historique approprié",
+                    "✓ Ponctuation et orthographe correctes"
+                ]
+            },
+            {
+                title: "Expliquez comment deux superpuissances contradictoires émergent de la WWII",
+                instruction: "Rédigez une introduction de dissertation (10-12 lignes) avec :\n1. Une phrase d'accroche\n2. Présentation des deux superpuissances\n3. Énoncé de la problématique\n4. Annonce du plan",
+                criterion: [
+                    "✓ Accroche percutante",
+                    "✓ Contexte historique clair",
+                    "✓ Problématique en question",
+                    "✓ Annonce du plan avec 'I... II... III'",
+                    "✓ Vocabulaire précis et soutenu"
+                ]
+            },
+            {
+                title: "Rédigez une conclusion sur la Guerre froide naissante",
+                instruction: "Rédigez une conclusion structurée (10-12 lignes) :\n1. Rappel de la thèse\n2. Synthèse des trois parties\n3. Dépassement du sujet\n4. Ouverture temporelle",
+                criterion: [
+                    "✓ Reprise efficace de la thèse",
+                    "✓ Pas de nouveaux arguments",
+                    "✓ Synthesis cohérente",
+                    "✓ Ouverture sur la suite (Guerre froide, années 1950-60)",
+                    "✓ Tone conclusif"
+                ]
+            },
+            {
+                title: "Décrivez les enjeux du Procès de Nuremberg",
+                instruction: "Rédigez un paragraphe (8-10 lignes) présentant :\n1. Les objectifs du procès\n2. Les innovations juridiques\n3. Ses limites et critiques",
+                criterion: [
+                    "✓ Objectifs clairement énoncés",
+                    "✓ Termes juridiques (crime contre l'humanité, génocide)",
+                    "✓ Équilibre critiques/contributions",
+                    "✓ Références à des noms/dates précises",
+                    "✓ Conclusion sur son importance"
+                ]
+            },
+            {
+                title: "Expliquez pourquoi le Rideau de fer n'est pas qu'une expression",
+                instruction: "Rédigez un paragraphe (8-10 lignes) montrant que :\n1. C'est d'abord une métaphore (Churchill 1946)\n2. Mais elle décrit une réalité géopolitique concrète\n3. Avec des exemples concrets (frontières, régimes)",
+                criterion: [
+                    "✓ Distinction métaphore/réalité",
+                    "✓ Citation de Churchill\n✓ Exemples géographiques précis",
+                    "✓ Explication des systèmes politiques",
+                    "✓ Conclusion sur les conséquences"
+                ]
+            },
+            {
+                title: "Comparez Bretton Woods et le Plan Marshall",
+                instruction: "Rédigez un paragraphe (10-12 lignes) montrant :\n1. Bretton Woods = ordre monétaire international\n2. Plan Marshall = reconstruction économique\n3. Comment ils se complètent",
+                criterion: [
+                    "✓ Dates et lieux corrects",
+                    "✓ Distinction clear entre les deux",
+                    "✓ Institutions spécifiques mentionnées",
+                    "✓ Liens logiques entre eux",
+                    "✓ Impact global expliqué"
+                ]
+            },
+            {
+                title: "Analysez l'impact de l'arme atomique sur la fin de la WWII",
+                instruction: "Rédigez un paragraphe (9-11 lignes) expliquant :\n1. Qu'est-ce que Hiroshima et Nagasaki ?\n2. Impact militaire et moral\n3. Enjeu de pouvoir (intimidation de l'URSS)",
+                criterion: [
+                    "✓ Dates précises (6 et 9 août 1945)",
+                    "✓ Bilans humains mentionnés",
+                    "✓ Débat moral reconnu",
+                    "✓ Contexte géopolitique (URSS)",
+                    "✓ Conclusion sur l'ère nucléaire"
+                ]
+            },
+            {
+                title: "Montrez comment la WWII débouche sur la Guerre froide",
+                instruction: "Rédigez un passage structuré (12-14 lignes) avec :\n1. Une introduction présentant la transition\n2. 2-3 facteurs clés (idéologie, puissance, méfiance)\n3. Une conclusion sur l'inévitabilité du conflit",
+                criterion: [
+                    "✓ Vocabulaire : capitalisme, communisme, Rideau de fer",
+                    "✓ Chronologie claire (1944-1949)",
+                    "✓ Personnages importants cités",
+                    "✓ Événements clés mentionnés",
+                    "✓ Analyse causale bien structurée"
+                ]
+            }
+        ];
+
+        const memorisationData = [
+            // DÉFINITIONS ESSENTIELLES
+            { term: "Rideau de fer", definition: "Expression symbolisant la division entre l'Europe de l'Ouest capitaliste et l'Europe de l'Est communiste - discours de Churchill 1946", difficulty: "easy" },
+            { term: "Bretton Woods", definition: "Accords de 1944 créant le FMI et la Banque Mondiale, établissant l'étalon de change-or avec le dollar", difficulty: "medium" },
+            { term: "Plan Marshall", definition: "Programme d'aide économique américain (1947-1952) pour reconstruire l'Europe de l'Ouest (13 milliards $)", difficulty: "easy" },
+            { term: "Doctrine Truman", definition: "Politique d'endiguement du communisme (1947) : engagement américain de soutenir les 'peuples libres' menacés", difficulty: "medium" },
+            { term: "Blocus de Berlin", definition: "Tentative soviétique (juin 1948-mai 1949) d'étouffer Berlin-Ouest en coupant les accès - défiée par le pont aérien", difficulty: "hard" },
+            { term: "OTAN", definition: "Organisation du Traité de l'Atlantique Nord (1949) - alliance militaire défensive avec 12 membres fondateurs, Article 5", difficulty: "easy" },
+            { term: "Shoah", definition: "Extermination systématique de 6 millions de Juifs par les nazis - génocide industrialisé", difficulty: "easy" },
+            { term: "Superpuissance", definition: "État disposant d'une puissance militaire, économique et politique considérable capable de projeter sa force mondialement", difficulty: "easy" },
+            { term: "Guerre froide", definition: "Confrontation idéologique et politique entre USA et URSS (1945-1991) sans conflit armé direct", difficulty: "easy" },
+            { term: "Crime contre l'humanité", definition: "Concept juridique créé à Nuremberg : crime commis contre des populations civiles en temps de guerre ou de paix", difficulty: "medium" },
+            { term: "Etalon de change-or", definition: "Système où le dollar américain était la monnaie de référence (35$ = 1 once d'or) établi à Bretton Woods", difficulty: "hard" },
+            { term: "Débarquement de Normandie", definition: "Opération Overlord - 6 juin 1944 : plus grande opération amphibie de l'histoire avec 156 000 soldats", difficulty: "easy" },
+            { term: "Procès de Nuremberg", definition: "Tribunal international (1945-1946) juggeant 24 nazis : création des concepts de crime contre l'humanité et génocide", difficulty: "medium" },
+            { term: "Coup de Prague", definition: "Février 1948 : renversement du gouvernement démocratique tchécoslovaque et installation d'un régime communiste", difficulty: "hard" },
+            { term: "Pont aérien de Berlin", definition: "Opération de transport massif aérien (1948-1949) pour approvisionner Berlin-Ouest assiégée par les Soviétiques", difficulty: "hard" },
+            
+            // DATES CLÉS
+            { term: "6 juin 1944", definition: "Opération Overlord - Débarquement en Normandie. Jour J marquant le début de la libération de l'Europe occupée.", difficulty: "easy" },
+            { term: "8 mai 1945", definition: "Capitulation allemande. Fin de la Seconde Guerre mondiale en Europe (VE Day).", difficulty: "easy" },
+            { term: "6 août 1945", definition: "Bombardement atomique de Hiroshima. 80 000 morts instantanément.", difficulty: "easy" },
+            { term: "9 août 1945", definition: "Bombardement atomique de Nagasaki. Le même jour, l'URSS entre en guerre contre le Japon.", difficulty: "easy" },
+            { term: "2 septembre 1945", definition: "Capitulation officielle du Japon. Fin de la Seconde Guerre mondiale en Asie (VJ Day).", difficulty: "easy" },
+            { term: "Février 1945", definition: "Conférence de Yalta. Roosevelt, Churchill et Staline décident de l'après-guerre (réparations, ONU).", difficulty: "medium" },
+            { term: "Juillet 1944", definition: "Accords de Bretton Woods. 44 nations créent le FMI et la Banque mondiale.", difficulty: "medium" },
+            { term: "Novembre 1945", definition: "Ouverture du Procès de Nuremberg. Jugement des nazis pour crimes contre l'humanité.", difficulty: "medium" },
+            { term: "Mars 1946", definition: "Discours de Churchill à Fulton (Missouri). Prononce l'expression 'Rideau de fer'.", difficulty: "medium" },
+            { term: "Juillet 1945", definition: "Conférence de Potsdam. Truman, Churchill/Attlee et Staline décident du sort de l'Allemagne.", difficulty: "medium" },
+            
+            // PERSONNAGES CLÉS
+            { term: "Hitler", definition: "Führer d'Allemagne (1934-1945). Responsable de la Seconde Guerre mondiale et de la Shoah. S'est suicidé le 30 avril 1945.", difficulty: "easy" },
+            { term: "Roosevelt", definition: "Président américain (1933-1945). A menéd les USA pendant la WWII. Mort en avril 1945, remplacé par Truman.", difficulty: "easy" },
+            { term: "Truman", definition: "Président américain (1945-1953). A autorisé les bombes atomiques sur Hiroshima et Nagasaki.", difficulty: "easy" },
+            { term: "Staline", definition: "Dictateur soviétique (1922-1953). Représente l'URSS aux conférences alliées. Impose le communisme en Europe de l'Est.", difficulty: "easy" },
+            { term: "Churchill", definition: "Premier ministre britannique (1940-1945, 1951-1955). Prononce le discours du 'Rideau de fer'.", difficulty: "easy" },
+            { term: "Eisenhower", definition: "Général américain. Commandant suprême de l'Opération Overlord. Devient président des USA (1953-1961).", difficulty: "easy" },
+            { term: "Mao Zedong", definition: "Leader communiste chinois. Prend le pouvoir en Chine en octobre 1949. Suscite la 'panique de Pékin' en Occident.", difficulty: "medium" },
+            { term: "De Gaulle", definition: "Général français. Chef de la Résistance pendant WWII. Préside le Gouvernement provisoire français.", difficulty: "easy" },
+            
+            // ORGANISATIONS ET INSTITUTIONS
+            { term: "ONU", definition: "Organisation des Nations unies (1945). Succède à la Société des Nations. Siège à New York. Objectif : maintenir la paix.", difficulty: "easy" },
+            { term: "FMI", definition: "Fonds Monétaire International. Créé à Bretton Woods. Stabilise les monnaies et les taux de change.", difficulty: "medium" },
+            { term: "Banque Mondiale", definition: "Banque pour la Reconstruction et le Développement. Créée à Bretton Woods. Finance la reconstruction de l'Europe.", difficulty: "medium" },
+            { term: "Conseil de sécurité ONU", definition: "15 membres dont 5 permanents (USA, URSS, RU, France, Chine). Seul organe habilité à prendre des mesures coercitives.", difficulty: "medium" },
+            { term: "Assemblée générale ONU", definition: "Tous les États membres. Une voix par État. Principale instance délibérante de l'ONU.", difficulty: "easy" },
+            { term: "OECE", definition: "Organisation Européenne de Coopération Économique (1948). Coordonne l'application du Plan Marshall.", difficulty: "hard" },
+            
+            // CONCEPTS POLITIQUES
+            { term: "Capitalisme", definition: "Système économique basé sur la propriété privée et l'économie de marché. Défendu par les USA.", difficulty: "easy" },
+            { term: "Communisme", definition: "Idéologie basée sur l'abolition des classes et la propriété collective. Régime de l'URSS après 1917.", difficulty: "easy" },
+            { term: "Totalitarisme", definition: "Régime où l'État contrôle tous les aspects de la vie. Caractérise l'Allemagne nazie et l'URSS de Staline.", difficulty: "medium" },
+            { term: "Démocratie libérale", definition: "Système politique avec libertés individuelles, élections, pluralisme. Idéal des démocraties occidentales.", difficulty: "easy" },
+            { term: "Satellisation", definition: "Fait pour un pays de devenir vassal politique et militaire d'une puissance dominante. Cas de l'Europe de l'Est après 1945.", difficulty: "hard" },
+            { term: "Bloc occidental", definition: "Pays capitalistes et démocratiques alignés sur les USA après 1947. Membres de l'OTAN après 1949.", difficulty: "easy" },
+            { term: "Bloc soviétique", definition: "Pays communistes contrôlés par l'URSS après 1945. Comprend l'Europe de l'Est, la Chine, la Corée du Nord.", difficulty: "easy" },
+            
+            // ÉVÉNEMENTS SPÉCIFIQUES
+            { term: "Shoah", definition: "Extermination systématique de 6 millions de Juifs par le régime nazi (1941-1945). Aussi 500 000 Tziganes.", difficulty: "easy" },
+            { term: "Holocauste", definition: "Terme large désignant le génocide des Juifs. Inclut les camps d'Auschwitz, Treblinka, Sobibor.", difficulty: "easy" },
+            { term: "Bombing de Dresde", definition: "Février 1945 : bombardement massif par les Alliés. Destruction quasi-totale de la ville. Débat sur sa légitimité.", difficulty: "hard" },
+            { term: "Atomisation de Varsovie", definition: "La ville a été détruite à 90% pendant la WWII. Symbole de la destruction urbaine massive.", difficulty: "hard" },
+            { term: "Opération Overlord", definition: "Débarquement en Normandie le 6 juin 1944. Commandé par Eisenhower. Implique USA, RU, Canada. 156 000 soldats.", difficulty: "easy" },
+            { term: "Island hopping", definition: "Stratégie de 'saut de puces' dans le Pacifique. Contournement des positions japonaises fortes. Réduction des pertes alliées.", difficulty: "medium" },
+            { term: "Lois de Nuremberg", definition: "Lois nazies de 1935 discriminant les Juifs. Première étape de la persécution nazie.", difficulty: "hard" },
+            { term: "Conférence de Wannsee", definition: "Janvier 1942. Où les nazis décident de la 'solution finale' : extermination complète des Juifs.", difficulty: "hard" },
+            
+            // BILANS ET CHIFFRES
+            { term: "60-70 millions", definition: "Nombre total de morts à la Seconde Guerre mondiale.", difficulty: "easy" },
+            { term: "24 millions", definition: "Nombre de Soviétiques morts (dont 14 millions de civils). Plus grande perte humaine de tout pays.", difficulty: "easy" },
+            { term: "6 millions", definition: "Nombre de Juifs tués à la Shoah. Environ 2/3 des Juifs d'Europe.", difficulty: "easy" },
+            { term: "500 000", definition: "Nombre de Tziganes tués par les nazis.", difficulty: "hard" },
+            { term: "80-140 000", definition: "Morts à Hiroshima : 80 000 instantanément, 140 000 au total.", difficulty: "medium" },
+            { term: "70 000", definition: "Total des morts à Nagasaki.", difficulty: "medium" },
+            { term: "13 milliards", definition: "Montant total du Plan Marshall en dollars (1947-1952).", difficulty: "easy" },
+            { term: "16 pays", definition: "Nombre de pays ayant bénéficié du Plan Marshall.", difficulty: "easy" },
+            
+            // DOCTRINES ET POLITIQUES
+            { term: "Doctrine Jdanov", definition: "Réponse soviétique (1947) au discours de Churchill. Monde divisé en deux camps irréconciliables.", difficulty: "hard" },
+            { term: "Endiguement", definition: "Politique US de Truman : contenir l'expansion communiste sans guerre directe. Base de la Guerre froide.", difficulty: "medium" },
+            { term: "Coexistence pacifique", definition: "Idée que capitalisme et communisme peuvent coexister sans violence. Slogan de la Guerre froide.", difficulty: "hard" },
+            { term: "Dissuasion nucléaire", definition: "Stratégie basée sur la menace mutuelle. Si tu m'attaques, tu seras anéanti. Fonde la stabilité du monde bipolaire.", difficulty: "hard" },
+            { term: "Article 5 OTAN", definition: "Clause d'assistance collective : une attaque contre un membre = attaque contre tous. Jamais invoqué avant 2001.", difficulty: "hard" },
+            
+            // DIVISIONS POLITIQUES
+            { term: "Allemagne divisée", definition: "En 1949, création de la RFA (zone occidentale) et de la RDA (zone soviétique). Représente la division de l'Europe.", difficulty: "easy" },
+            { term: "Berlin divisée", definition: "Capitale allemande divisée en 4 zones, puis en deux blocs après la Guerre froide (1949-1989).", difficulty: "easy" },
+            { term: "Corée divisée", definition: "Après 1945, la péninsule est divisée en Corée du Nord (soviétique) et du Sud (américaine). Source de futur conflit.", difficulty: "hard" },
+            { term: "Viêt-Nam divisé", definition: "Le pays est divisé entre le nord (communiste) et le sud (anti-communiste). Source de futur conflit.", difficulty: "hard" }
+        ];
+
+        // ============ STATE ============
+        let currentFlashcardIndex = 0;
+        let isFlipped = false;
+        let flashcardsShuffled = false;
+        let quizIndex = 0;
+        let quizScore = 0;
+        let quizAnswers = [];
+        let memorisationStates = {};
+
+        // ============ FUNCTIONS FLASHCARDS ============
+        function initFlashcards() {
+            // Randomiser les flashcards et en garder 50 max au hasard
+            const shuffled = shuffleArray(flashcardsData);
+            window.currentFlashcards = shuffled.slice(0, Math.min(50, shuffled.length));
+            
+            currentFlashcardIndex = 0;
+            isFlipped = false;
+            displayFlashcard();
+        }
+
+        function displayFlashcard() {
+            const card = document.getElementById('flashcard');
+            const count = document.getElementById('flashcard-count');
+            const total = document.getElementById('flashcard-total');
+            const flashcards = window.currentFlashcards || flashcardsData;
+            
+            if (flashcards.length > 0) {
+                const current = flashcards[currentFlashcardIndex];
+                card.textContent = current.question;
+                card.classList.remove('flipped');
+                isFlipped = false;
+                count.textContent = currentFlashcardIndex + 1;
+                total.textContent = flashcards.length;
+            }
+        }
+
+        function flipFlashcard() {
+            const flashcards = window.currentFlashcards || flashcardsData;
+            const card = document.getElementById('flashcard');
+            if (!isFlipped) {
+                card.textContent = flashcards[currentFlashcardIndex].answer;
+                card.classList.add('flipped');
+            } else {
+                displayFlashcard();
+            }
+            isFlipped = !isFlipped;
+        }
+
+        function nextFlashcard() {
+            const flashcards = window.currentFlashcards || flashcardsData;
+            currentFlashcardIndex = (currentFlashcardIndex + 1) % flashcards.length;
+            displayFlashcard();
+        }
+
+        function previousFlashcard() {
+            const flashcards = window.currentFlashcards || flashcardsData;
+            currentFlashcardIndex = (currentFlashcardIndex - 1 + flashcards.length) % flashcards.length;
+            displayFlashcard();
+        }
+
+        function shuffleFlashcards() {
+            const flashcards = window.currentFlashcards || flashcardsData;
+            for (let i = flashcards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+            }
+            currentFlashcardIndex = 0;
+            displayFlashcard();
+        }
+
+        function resetFlashcards() {
+            currentFlashcardIndex = 0;
+            isFlipped = false;
+            displayFlashcard();
+        }
+
+        // ============ FUNCTIONS SHARE ============
+        function getAppUrl() {
+            // Construit l'URL correcte pour GitHub Pages ou localhost
+            const pathname = window.location.pathname;
+            const origin = window.location.origin;
+            
+            // Si on est sur GitHub Pages
+            if (pathname.includes('github.io')) {
+                // Format: /username/repo/app_revision.html
+                const parts = pathname.split('/').filter(p => p);
+                if (parts.length >= 2) {
+                    // Enlever le nom du fichier et reconstruire
+                    parts.pop();
+                    return origin + '/' + parts.join('/') + '/app_revision.html';
+                }
+            }
+            
+            // Sinon, utiliser le pathname complet
+            return origin + pathname.substring(0, pathname.lastIndexOf('/')) + '/app_revision.html';
+        }
+
+        function openShareModal() {
+            const appUrl = getAppUrl();
+            
+            // URL simple sans progression
+            document.getElementById('simple-url').textContent = appUrl;
+            
+            // URL avec progression encodée
+            const progressData = {
+                flashcard: currentFlashcardIndex,
+                quiz: quizScore,
+                memorisation: memorisationStates
+            };
+            const encoded = btoa(JSON.stringify(progressData));
+            const progressUrl = appUrl + '?progress=' + encoded;
+            document.getElementById('progress-url').textContent = progressUrl;
+            
+            document.getElementById('shareModal').classList.add('show');
+            
+            // Générer QR code pour URL simple par défaut
+            setTimeout(() => generateQRCode(appUrl), 100);
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.remove('show');
+            document.getElementById('qrcode').innerHTML = '';
+        }
+
+        function generateQRCode(url) {
+            document.getElementById('qrcode').innerHTML = '';
+            new QRCode(document.getElementById('qrcode'), {
+                text: url,
+                width: 250,
+                height: 250,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        function shareViaQR(type) {
+            const appUrl = getAppUrl();
+            let url;
+            
+            if (type === 'simple') {
+                url = appUrl;
+            } else {
+                const progressData = {
+                    flashcard: currentFlashcardIndex,
+                    quiz: quizScore,
+                    memorisation: memorisationStates
+                };
+                const encoded = btoa(JSON.stringify(progressData));
+                url = appUrl + '?progress=' + encoded;
+            }
+            
+            document.getElementById('qrcode').innerHTML = '';
+            generateQRCode(url);
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const success = document.getElementById('copy-success');
+                success.style.display = 'block';
+                setTimeout(() => {
+                    success.style.display = 'none';
+                }, 2000);
+            }).catch(() => {
+                alert('Impossible de copier. Sélectionnez et copiez manuellement.');
+            });
+        }
+
+        function shareViaEmail() {
+            const appUrl = getAppUrl();
+            const subject = "📚 App de Révision - Histoire (WWII & Nouvel Ordre Mondial)";
+            const body = `Bonjour,\n\nJe te partage cette app de révision pour le cours d'Histoire sur la fin de la Seconde Guerre mondiale et le nouvel ordre mondial.\n\nL'app contient :\n- Flashcards de mémorisation\n- Quiz interactif\n- Exercices de dissertation\n- Entraînement à la rédaction\n- Système de mémorisation espacée\n\nAccède à l'app ici : ${appUrl}\n\nBonne révision !`;
+            
+            window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        function shareViaWhatsApp() {
+            const appUrl = getAppUrl();
+            const message = `📚 App de Révision - Histoire\n\nFin de la WWII & Nouvel Ordre Mondial\n\nAccède à l'app ici : ${appUrl}\n\n🎴 Flashcards\n❓ Quiz\n📝 Dissertations\n✏️ Rédaction\n🧠 Mémorisation`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/?text=${encodedMessage}`);
+        }
+
+        function loadProgressFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const progressParam = urlParams.get('progress');
+            
+            if (progressParam) {
+                try {
+                    const progressData = JSON.parse(atob(progressParam));
+                    if (progressData.memorisation) {
+                        memorisationStates = progressData.memorisation;
+                    }
+                    if (progressData.flashcard !== undefined) {
+                        currentFlashcardIndex = progressData.flashcard;
+                    }
+                    if (progressData.quiz !== undefined) {
+                        quizScore = progressData.quiz;
+                    }
+                } catch (e) {
+                    console.log('Progression chargée');
+                }
+            }
+        }
+
+        // ============ FUNCTIONS QUIZ ============
+        function shuffleArray(array) {
+            const copy = [...array];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        function initQuiz() {
+            // Randomiser et sélectionner jusqu'à 40 questions
+            const shuffled = shuffleArray(quizData);
+            const selectedQuestions = shuffled.slice(0, 40);
+            
+            quizIndex = 0;
+            quizScore = 0;
+            quizAnswers = new Array(selectedQuestions.length).fill(-1);
+            
+            // Remplacer temporairement quizData avec les questions sélectionnées
+            window.currentQuizQuestions = selectedQuestions;
+            displayQuizQuestion();
+        }
+
+        function displayQuizQuestion() {
+            const container = document.getElementById('quiz-container');
+            const result = document.getElementById('quiz-result');
+            const questions = window.currentQuizQuestions || quizData;
+            
+            if (quizIndex >= questions.length) {
+                result.style.display = 'block';
+                container.style.display = 'none';
+                const percentage = Math.round((quizScore / questions.length) * 100);
+                document.getElementById('final-score').innerHTML = `
+                    <div style="margin-bottom: 10px;">Score Final</div>
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">${quizScore}/${questions.length}</div>
+                    <div style="font-size: 1.2em;">${percentage}%</div>
+                    <div style="margin-top: 10px; color: #666;">${getScoreFeedback(percentage)}</div>
+                `;
+                return;
+            }
+
+            const question = questions[quizIndex];
+            let html = `
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${((quizIndex + 1) / questions.length) * 100}%">
+                        ${quizIndex + 1} / ${questions.length}
+                    </div>
+                </div>
+                <div class="quiz-question">
+                    <h3>Question ${quizIndex + 1} : ${question.question}</h3>
+                    <div class="quiz-options">
+            `;
+
+            question.options.forEach((option, index) => {
+                const isSelected = quizAnswers[quizIndex] === index;
+                html += `
+                    <div class="option ${isSelected ? 'selected' : ''}" onclick="selectQuizOption(${index})">
+                        ${String.fromCharCode(65 + index)}. ${option}
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn-secondary" ${quizIndex === 0 ? 'disabled' : ''} onclick="previousQuizQuestion()">← Précédent</button>
+                    <button class="btn-primary" onclick="nextQuizQuestion()">Suivant →</button>
+                    <button class="btn-danger" onclick="submitQuiz()">Soumettre le Quiz</button>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            result.style.display = 'none';
+        }
+
+        function selectQuizOption(index) {
+            quizAnswers[quizIndex] = index;
+            displayQuizQuestion();
+        }
+
+        function nextQuizQuestion() {
+            const questions = window.currentQuizQuestions || quizData;
+            if (quizIndex < questions.length - 1) {
+                quizIndex++;
+                displayQuizQuestion();
+            }
+        }
+
+        function previousQuizQuestion() {
+            if (quizIndex > 0) {
+                quizIndex--;
+                displayQuizQuestion();
+            }
+        }
+
+        function submitQuiz() {
+            const questions = window.currentQuizQuestions || quizData;
+            quizScore = 0;
+            let html = '<div class="progress-bar" style="margin-bottom: 30px;"><div class="progress-fill" style="width: 100%;">Quiz Complété</div></div>';
+            
+            questions.forEach((question, index) => {
+                const userAnswer = quizAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                if (isCorrect) quizScore++;
+
+                html += `
+                    <div class="quiz-question" style="margin-bottom: 20px;">
+                        <h3>Q${index + 1} : ${question.question}</h3>
+                        <div class="quiz-options">
+                `;
+
+                question.options.forEach((option, optIndex) => {
+                    let className = '';
+                    if (optIndex === question.correct) className = 'correct';
+                    else if (optIndex === userAnswer && !isCorrect) className = 'incorrect';
+                    
+                    html += `<div class="option ${className}">${String.fromCharCode(65 + optIndex)}. ${option}</div>`;
+                });
+
+                html += `
+                        </div>
+                        <div class="structure-hint">
+                            ${isCorrect ? '✓ Correct !' : '✗ Incorrect'} - ${question.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('quiz-container').innerHTML = html;
+            document.getElementById('quiz-result').style.display = 'block';
+            
+            const percentage = Math.round((quizScore / questions.length) * 100);
+            document.getElementById('final-score').innerHTML = `
+                <div style="margin-bottom: 10px;">Score Final</div>
+                <div style="font-size: 2.5em; margin-bottom: 10px;">${quizScore}/${questions.length}</div>
+                <div style="font-size: 1.2em;">${percentage}%</div>
+                <div style="margin-top: 10px; color: #666;">${getScoreFeedback(percentage)}</div>
+            `;
+        }
+
+        function restartQuiz() {
+            document.getElementById('quiz-result').style.display = 'none';
+            initQuiz();
+        }
+
+        function getScoreFeedback(percentage) {
+            if (percentage >= 80) return "🌟 Excellent ! Tu maîtrises bien ce sujet !";
+            if (percentage >= 60) return "👍 Bon ! Continue à réviser certains points.";
+            if (percentage >= 40) return "📚 Moyen. Révise les concepts clés.";
+            return "⚠️ À travailler. Consulte ton cours.";
+        }
+
+        // ============ FUNCTIONS DISSERTATION ============
+        function initDissertation() {
+            // Randomiser les dissertations et en afficher 3-5 au hasard
+            const shuffled = shuffleArray(dissertations);
+            window.currentDissertations = shuffled.slice(0, Math.min(5, shuffled.length));
+            
+            const list = document.getElementById('dissertation-list');
+            list.innerHTML = '';
+            window.currentDissertations.forEach((diss, index) => {
+                const html = `
+                    <div class="dissertation-item">
+                        <h3>${index + 1}. ${diss.title}</h3>
+                        <button class="btn-primary" onclick="showDissertation(${index})">Voir le plan</button>
+                    </div>
+                `;
+                list.innerHTML += html;
+            });
+        }
+
+        function showDissertation(index) {
+            const dissertationsList = window.currentDissertations || dissertations;
+            const diss = dissertationsList[index];
+            const html = `
+                <div class="modal-header">📝 ${diss.title}</div>
+                <div class="structure-hint">
+                    <h4>Introduction :</h4>
+                    <p>${diss.plan.intro}</p>
+                </div>
+                <div class="structure-hint">
+                    <h4>Partie 1 :</h4>
+                    <p style="white-space: pre-line;">${diss.plan.part1}</p>
+                </div>
+                <div class="structure-hint">
+                    <h4>Partie 2 :</h4>
+                    <p style="white-space: pre-line;">${diss.plan.part2}</p>
+                </div>
+                <div class="structure-hint">
+                    <h4>Partie 3 :</h4>
+                    <p style="white-space: pre-line;">${diss.plan.part3}</p>
+                </div>
+                <div class="structure-hint">
+                    <h4>Conclusion :</h4>
+                    <p>${diss.plan.conclusion}</p>
+                </div>
+                <button class="btn-success" onclick="startRedactionDissertation(${index})" style="margin-top: 20px; width: 100%;">✏️ Rédiger cette dissertation</button>
+            `;
+            document.getElementById('modal-dissertation-content').innerHTML = html;
+            document.getElementById('dissertationModal').classList.add('show');
+        }
+
+        function closeDissertationModal() {
+            document.getElementById('dissertationModal').classList.remove('show');
+        }
+
+        // ============ FUNCTIONS RÉDACTION ============
+        function initRedaction() {
+            // Randomiser les exercices et en afficher 3-5 au hasard
+            const shuffled = shuffleArray(redactionExercices);
+            window.currentRedactionExercices = shuffled.slice(0, Math.min(5, shuffled.length));
+            
+            const exercice = document.getElementById('redaction-exercice');
+            const exercicesHtml = window.currentRedactionExercices.map((ex, index) => `
+                <div class="dissertation-item">
+                    <h3>${index + 1}. ${ex.title}</h3>
+                    <button class="btn-primary" onclick="startRedaction(${index})">Commencer</button>
+                </div>
+            `).join('');
+            exercice.innerHTML = exercicesHtml;
+        }
+
+        function startRedaction(index) {
+            const exercicesList = window.currentRedactionExercices || redactionExercices;
+            const ex = exercicesList[index];
+            const html = `
+                <div class="modal-header">✏️ ${ex.title}</div>
+                <p style="margin-bottom: 15px; line-height: 1.6; color: #666;">${ex.instruction.replace(/\n/g, '<br>')}</p>
+                
+                <h4 style="margin-top: 20px; margin-bottom: 10px;">Critères d'évaluation :</h4>
+                <ul style="margin-left: 20px; margin-bottom: 20px;">
+                    ${ex.criterion.map(c => `<li style="margin-bottom: 5px;">${c}</li>`).join('')}
+                </ul>
+
+                <textarea id="redaction-textarea" placeholder="Écrivez votre réponse ici..."></textarea>
+                <div class="word-count"><span id="word-count">0</span> mots</div>
+
+                <button class="btn-success" onclick="evaluateRedaction()" style="margin-top: 15px; width: 100%;">📊 Évaluer ma rédaction</button>
+                <div id="redaction-feedback"></div>
+            `;
+
+            document.getElementById('modal-redaction-content').innerHTML = html;
+            document.getElementById('redactionModal').classList.add('show');
+
+            document.getElementById('redaction-textarea').addEventListener('input', function() {
+                const words = this.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+                document.getElementById('word-count').textContent = words;
+            });
+        }
+
+        function evaluateRedaction() {
+            const textarea = document.getElementById('redaction-textarea');
+            const text = textarea.value.trim();
+            const feedback = document.getElementById('redaction-feedback');
+            const words = text.split(/\s+/).filter(w => w.length > 0).length;
+
+            let evaluations = [];
+            let score = 0;
+
+            if (words < 50) evaluations.push("⚠️ Trop court. Visez au moins 50-70 mots pour un paragraphe.");
+            else { score++; evaluations.push("✓ Longueur suffisante."); }
+
+            if (text.includes('.') && text.includes(',')) { score++; evaluations.push("✓ Bonne ponctuation."); }
+            else evaluations.push("⚠️ Vérifiez votre ponctuation.");
+
+            if (/[A-Z]/.test(text[0])) { score++; evaluations.push("✓ Début de phrase correct."); }
+            else evaluations.push("⚠️ Commencez par une majuscule.");
+
+            if (!/\d{4}/.test(text)) evaluations.push("⚠️ Ajoutez des dates précises.");
+            else { score++; evaluations.push("✓ Dates présentes."); }
+
+            const keywords = ["guerre", "paix", "états-unis", "urss", "communisme", "capitalisme", "démocratie", "liberté"];
+            const hasKeywords = keywords.some(kw => text.toLowerCase().includes(kw));
+            if (hasKeywords) { score++; evaluations.push("✓ Vocabulaire historique approprié."); }
+            else evaluations.push("⚠️ Utilisez du vocabulaire historique spécifique.");
+
+            const feedbackHtml = `
+                <div class="feedback" style="margin-top: 20px;">
+                    <h4>Évaluation :</h4>
+                    ${evaluations.map(e => `<p>${e}</p>`).join('')}
+                    <p style="margin-top: 10px; font-weight: bold;">Score : ${score}/5</p>
+                </div>
+            `;
+            feedback.innerHTML = feedbackHtml;
+        }
+
+        function closeRedactionModal() {
+            document.getElementById('redactionModal').classList.remove('show');
+        }
+
+        function startRedactionDissertation(index) {
+            const dissertationsList = window.currentDissertations || dissertations;
+            const diss = dissertationsList[index];
+            const html = `
+                <div class="modal-header">✏️ Rédiger : ${diss.title}</div>
+                <p style="margin-bottom: 15px; color: #666;">Écrivez votre dissertation complète en vous aidant du plan proposé.</p>
+                
+                <textarea id="redaction-textarea" placeholder="Écrivez votre dissertation (introduction, 3 parties, conclusion)..."></textarea>
+                <div class="word-count"><span id="word-count">0</span> mots</div>
+
+                <button class="btn-success" onclick="evaluateDissertation()" style="margin-top: 15px; width: 100%;">📊 Évaluer</button>
+                <div id="redaction-feedback"></div>
+            `;
+
+            document.getElementById('modal-redaction-content').innerHTML = html;
+            document.getElementById('redactionModal').classList.add('show');
+
+            document.getElementById('redaction-textarea').addEventListener('input', function() {
+                const words = this.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+                document.getElementById('word-count').textContent = words;
+            });
+        }
+
+        function evaluateDissertation() {
+            const textarea = document.getElementById('redaction-textarea');
+            const text = textarea.value.trim();
+            const feedback = document.getElementById('redaction-feedback');
+            const words = text.split(/\s+/).filter(w => w.length > 0).length;
+
+            let issues = [];
+            let qualities = [];
+
+            if (words < 300) issues.push("⚠️ Trop court. Une dissertation complète doit faire 300-500 mots minimum.");
+            else qualities.push("✓ Longueur suffisante.");
+
+            if (text.match(/[I|1]\./)) qualities.push("✓ Parties numérotées.");
+            else issues.push("⚠️ Numérotez vos parties (I, II, III).");
+
+            if (/introduction|problématique|annonce/i.test(text)) qualities.push("✓ Introduction structurée.");
+            else issues.push("⚠️ L'introduction doit annoncer le plan.");
+
+            if (/conclusion|ouverture|synthèse/i.test(text)) qualities.push("✓ Conclusion présente.");
+            else issues.push("⚠️ Concluez votre dissertation.");
+
+            const feedbackHtml = `
+                <div class="feedback" style="margin-top: 20px;">
+                    <h4>Retour :</h4>
+                    ${qualities.map(q => `<p style="color: #155724;">${q}</p>`).join('')}
+                    ${issues.map(i => `<p style="color: #721c24;">${i}</p>`).join('')}
+                </div>
+            `;
+            feedback.innerHTML = feedbackHtml;
+        }
+
+        // ============ FUNCTIONS MÉMORISATION ============
+        function initMemorisation() {
+            // Randomiser les termes et en garder 50 max au hasard
+            const shuffled = shuffleArray(memorisationData);
+            window.currentMemorisation = shuffled.slice(0, Math.min(50, shuffled.length));
+            
+            window.currentMemorisation.forEach(item => {
+                if (!memorisationStates[item.term]) {
+                    memorisationStates[item.term] = 'new';
+                }
+            });
+            displayMemorisation();
+        }
+
+        function displayMemorisation() {
+            const list = document.getElementById('memorisation-list');
+            const items = window.currentMemorisation || memorisationData;
+            const stats = {
+                mastered: 0,
+                learning: 0,
+                new: 0
+            };
+
+            let html = '';
+            items.forEach((item, index) => {
+                const state = memorisationStates[item.term] || 'new';
+                if (state === 'mastered') stats.mastered++;
+                if (state === 'learning') stats.learning++;
+                if (state === 'new') stats.new++;
+
+                const diffClass = `difficulty-${item.difficulty}`;
+                const cardClass = `spaced-repetition-card ${state}`;
+
+                html += `
+                    <div class="${cardClass}">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <h3 style="color: #333; margin-bottom: 10px;">${item.term}</h3>
+                                <div class="hidden-answer" id="answer-${index}">
+                                    <strong>Définition :</strong><br>${item.definition}
+                                </div>
+                            </div>
+                            <span class="difficulty-indicator ${diffClass}">${item.difficulty}</span>
+                        </div>
+                        <div style="margin-top: 15px; display: flex; gap: 10px;">
+                            <button class="btn-secondary" onclick="toggleAnswer(${index})">👁️ Voir la réponse</button>
+                            <button class="btn-danger" onclick="markAsNew('${item.term}')">🔄 Nouvelle</button>
+                            <button class="btn-secondary" onclick="markAsLearning('${item.term}')">📖 En cours</button>
+                            <button class="btn-success" onclick="markAsMastered('${item.term}')">✅ Maîtrisée</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('memorisation-list').innerHTML = html;
+            document.getElementById('stats-mastered').textContent = stats.mastered;
+            document.getElementById('stats-learning').textContent = stats.learning;
+            document.getElementById('stats-new').textContent = stats.new;
+        }
+
+        function toggleAnswer(index) {
+            document.getElementById(`answer-${index}`).classList.toggle('visible');
+        }
+
+        function markAsNew(term) {
+            memorisationStates[term] = 'new';
+            displayMemorisation();
+        }
+
+        function markAsLearning(term) {
+            memorisationStates[term] = 'learning';
+            displayMemorisation();
+        }
+
+        function markAsMastered(term) {
+            memorisationStates[term] = 'mastered';
+            displayMemorisation();
+        }
+
+        // ============ NAVIGATION ============
+        function showSection(sectionName) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionName).classList.add('active');
+
+            if (sectionName === 'flashcards') initFlashcards();
+            if (sectionName === 'quiz') initQuiz();
+            if (sectionName === 'dissertation') initDissertation();
+            if (sectionName === 'redaction') initRedaction();
+            if (sectionName === 'memorisation') initMemorisation();
+        }
+
+        // ============ INIT ============
+        window.addEventListener('load', () => {
+            loadProgressFromURL();
+            showSection('flashcards');
+        });
+    </script>
+</body>
+</html>
